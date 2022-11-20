@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:59 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 8:50:38 pm
+ * Last Modified: Sunday, 20th November 2022 11:47:39 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -190,6 +190,13 @@ double Distance(std::vector<double> &x, std::vector<double> &y) {
 void FitEphemeris(std::vector<PosAndClock> &data, OrbitParam &param,
                   DeltaOrbitParam &delta_param, const FittingOptions &options) {
   int n = (int)data.size(); // 拟合数据大小
+
+  if (n <= 5) { // 间接平差需要大于5个观测值
+    std::cout << "Warning: At least 5 observations are required!" << std::endl;
+    std::cout << "Fitting failed!" << std::endl;
+    return;
+  }
+
   double toe = param.toe;   // 星历参考时刻
 
   // 将参数结构体变为数组，便于使用循环操作
