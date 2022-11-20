@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:53 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 2:59:49 pm
+ * Last Modified: Sunday, 20th November 2022 6:49:34 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -150,17 +150,21 @@ struct DeltaOrbitParam {
 };
 
 struct FittingOptions {
-  int maxIter;  // 最大迭代次数
-  double tol;   // 收敛阈值
-  int deltaF;   // deltaF的精度：10^deltaF米
-  double delta; // 插值得到toe+Δ时刻的位置
-  bool verbose; // 是否打印迭代过程
+  int maxIter;             // 最大迭代次数
+  double tol;              // 收敛阈值
+  int deltaF;              // deltaF的精度：10^deltaF米
+  double delta;            // 插值得到toe+Δ时刻的位置
+  bool fitKepler;          // 是否使用Kepler初轨作为初值
+  bool fixDeltaOrbitParam; // 是否固定数值求导的微小量
+  bool verbose;            // 是否打印迭代过程
 
   FittingOptions() {
-    maxIter = 30;   // 默认最大迭代30次
-    tol = 1e-3;     // 默认收敛阈值1e-3米
-    deltaF = 0;     // 默认使用米级精度
-    delta = 1e-6;   // 默认插值1微秒
+    maxIter = 30;     // 默认最大迭代30次
+    tol = 1e-3;       // 默认收敛阈值1e-3米
+    deltaF = 0;       // 默认使用米级精度
+    delta = 1e-6;     // 默认插值1微秒
+    fitKepler = true; // 默认使用Kepler初轨作为初值
+    fixDeltaOrbitParam = true; // 默认不固定数值求导的微小量（在迭代中更新）
     verbose = true; // 默认打印迭代过程
   }
 };

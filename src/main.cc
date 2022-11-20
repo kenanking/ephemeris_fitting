@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 4:17:00 pm
+ * Last Modified: Sunday, 20th November 2022 7:03:21 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -78,16 +78,26 @@ int main(int, char **) {
        << endl;
   cout << endl;
 
-  // 初始化参数，设置toe时刻
+  // 初始化参数，toe必须是已知的
   OrbitParam param;
   param.toe = sow;
+
+  // 如果不使用开普勒初轨，需要设置初始的轨道参数
+  param.sqrtA = 5153.661;
+  param.e = 0.01201;
+  param.omega = 0.94435;
+  param.OMEGA = 0.36391;
+  param.i0 = 0.98890;
+  param.M0 = 2.82278;
 
   // 拟合相关设置
   FittingOptions options;
   options.maxIter = 150; // 最大迭代次数
   options.tol = 1e-5; // 迭代收敛阈值，前后两次中误差的变化小于该值时
-  options.deltaF = 0;     // ΔF采用米级精度
-  options.delta = 1e-6;   // 计算toe时刻速度使用的微小量
+  options.deltaF = 0;        // ΔF采用米级精度
+  options.delta = 1e-6;      // 计算toe时刻速度使用的微小量
+  options.fitKepler = false; // 是否使用Kepler初轨作为初始值
+  options.fixDeltaOrbitParam = false; // 是否固定数值求导的微小量（在迭代中更新）
   options.verbose = true; // 输出迭代过程
 
   // 设置数值导数计算时的微小量初值
