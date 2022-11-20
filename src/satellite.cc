@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:59 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 6:56:44 pm
+ * Last Modified: Sunday, 20th November 2022 8:50:38 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -93,7 +93,7 @@ std::vector<double> CalculateKeplerOrbit(Eigen::Vector3d &x,
   if (Omega < 0)
     Omega += 2 * pi;
 
-  double i0 = atan2(h[0] * h[0] + h[1] * h[1], h[2]);
+  double i0 = atan2(sqrt(h[0] * h[0] + h[1] * h[1]), h[2]);
   if (i0 < 0)
     i0 += 2 * pi;
 
