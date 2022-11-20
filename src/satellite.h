@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:53 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 6:49:34 pm
+ * Last Modified: Sunday, 20th November 2022 11:57:31 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -172,9 +172,6 @@ struct FittingOptions {
 Eigen::Matrix3d GetRotationMatrix(double angle, int axis);
 
 Eigen::Matrix3d GetRotationMatrixDerivative(double angle, int axis);
-
-void RotatePosVel(Eigen::Vector3d &pos, Eigen::Vector3d &vel,
-                  const Eigen::Matrix3d &R, const Eigen::Matrix3d &dR);
 
 double LagrangeInterpolate(std::vector<double> &x, std::vector<double> &y,
                            double x0);
