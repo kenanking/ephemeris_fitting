@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 10:06:43 am
+ * Last Modified: Monday, 21st November 2022 10:50:46 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -209,7 +209,12 @@ PosAndClock SP3File::GetInterpolatedData(const std::string &satName,
   double z = LagrangeInterpolate(ts, zs, toe);
   double clock = LagrangeInterpolate(ts, clocks, toe);
 
-  PosAndClock result{x, y, z, clock, toe};
+  PosAndClock result;
+  result.toe = toe;
+  result.x = x;
+  result.y = y;
+  result.z = z;
+  result.clock = clock;
   return result;
 }
 
