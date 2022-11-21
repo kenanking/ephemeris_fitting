@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 9:35:39 pm
+ * Last Modified: Monday, 21st November 2022 10:16:37 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -224,11 +224,11 @@ int main(int, char **) {
     cout << endl;
 
     // 验证外推精度
-    // 对拟合参数左侧外推1小时
+    // 对拟合参数左侧外推15分钟
     vector<double> toe_list_left;
     vector<double> xs_left, ys_left, zs_left;
     vector<double> xs_left_fit, ys_left_fit, zs_left_fit;
-    GNSSTime t_left = start_time - 3600;
+    GNSSTime t_left = start_time - 900;
     while (t_left < start_time) {
       // 计算外推结果
       PosAndClock d = sp3File.GetInterpolatedData(prn, t_left, 10);
@@ -281,7 +281,7 @@ int main(int, char **) {
     vector<double> toe_list_right;
     vector<double> xs_right, ys_right, zs_right;
     vector<double> xs_right_fit, ys_right_fit, zs_right_fit;
-    GNSSTime t_right = end_time + 3600;
+    GNSSTime t_right = end_time + 900;
     while (t_right > end_time) {
       // 计算外推结果
       PosAndClock d = sp3File.GetInterpolatedData(prn, t_right, 10);
@@ -346,6 +346,7 @@ int main(int, char **) {
     j["duration"] = duration;
     j["param"] = param.GetParam();
     j["delta_param"] = delta_param.GetParam();
+    j["sigma_0"] = sigma_0;
 
     j["left_extrapolation"]["toe"] = toe_list_left;
     j["left_extrapolation"]["x"] = xs_err_left;
