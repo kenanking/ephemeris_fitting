@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 11:31:58 am
+ * Last Modified: Monday, 21st November 2022 11:47:33 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -197,6 +197,7 @@ int main(int, char **) {
   cout << endl;
   cout << " - Interpolation RMS Error: " << rms_x_err << " " << rms_y_err << " "
        << rms_z_err << endl;
+  cout << endl;
 
   // 验证外推精度
   // 对拟合参数左侧外推1小时
