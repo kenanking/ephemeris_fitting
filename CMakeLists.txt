@@ -12,3 +12,4 @@ add_executable(ephemeris_fitting ${SRC_LIST})
 
 # Test
 add_executable(test_gnsstime test/test_gnsstime.cc src/gnsstime.cc)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
