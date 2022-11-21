@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 11:47:33 am
+ * Last Modified: Monday, 21st November 2022 6:32:27 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -108,7 +108,7 @@ int main(int, char **) {
   cout << "========================== Fitting Orbit ========================="
        << endl;
 
-  FitEphemeris(sp3Data, param, delta_param, options);
+  double sigma_0 = FitEphemeris(sp3Data, param, delta_param, options);
 
   cout << "================================================================="
        << endl;
@@ -117,24 +117,30 @@ int main(int, char **) {
   // 输出拟合结果
   cout << "========================== Fitting Result ========================"
        << endl;
-  cout << setprecision(11) << scientific << endl;
-  cout << "- Orbit Parameters: " << endl;
-  cout << " - Toe: " << param.toe << endl;
-  cout << " - sqrtA: " << param.sqrtA << endl;
-  cout << " - e: " << param.e << endl;
-  cout << " - omega: " << param.omega << endl;
-  cout << " - Delta_n: " << param.Delta_n << endl;
-  cout << " - M0: " << param.M0 << endl;
-  cout << " - OMEGA: " << param.OMEGA << endl;
-  cout << " - OMEGA_DOT: " << param.OMEGA_DOT << endl;
-  cout << " - i0: " << param.i0 << endl;
-  cout << " - IDOT: " << param.IDOT << endl;
-  cout << " - Cuc: " << param.Cuc << endl;
-  cout << " - Cus: " << param.Cus << endl;
-  cout << " - Crc: " << param.Crc << endl;
-  cout << " - Crs: " << param.Crs << endl;
-  cout << " - Cic: " << param.Cic << endl;
-  cout << " - Cis: " << param.Cis << endl;
+  if (sigma_0 == -1) {
+    cout << "- Fitting failed!" << endl;
+  } else {
+    cout << "- Fitting success!" << endl;
+    cout << " - Sigma_0: " << sigma_0 << endl;
+    cout << setprecision(11) << scientific << endl;
+    cout << "- Orbit Parameters: " << endl;
+    cout << " - Toe: " << param.toe << endl;
+    cout << " - sqrtA: " << param.sqrtA << endl;
+    cout << " - e: " << param.e << endl;
+    cout << " - omega: " << param.omega << endl;
+    cout << " - Delta_n: " << param.Delta_n << endl;
+    cout << " - M0: " << param.M0 << endl;
+    cout << " - OMEGA: " << param.OMEGA << endl;
+    cout << " - OMEGA_DOT: " << param.OMEGA_DOT << endl;
+    cout << " - i0: " << param.i0 << endl;
+    cout << " - IDOT: " << param.IDOT << endl;
+    cout << " - Cuc: " << param.Cuc << endl;
+    cout << " - Cus: " << param.Cus << endl;
+    cout << " - Crc: " << param.Crc << endl;
+    cout << " - Crs: " << param.Crs << endl;
+    cout << " - Cic: " << param.Cic << endl;
+    cout << " - Cis: " << param.Cis << endl;
+  }
   cout << endl;
   cout << "================================================================="
        << endl;

@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:53 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 9:53:19 am
+ * Last Modified: Monday, 21st November 2022 6:22:36 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -189,8 +189,8 @@ std::vector<std::vector<double>> CalculateNumericalDerivative(
     std::vector<double> (*func)(double, const OrbitParam &), double t,
     const std::vector<double> &param, const std::vector<double> &delta_param);
 
-void FitEphemeris(std::vector<PosAndClock> &data, OrbitParam &param,
-                  DeltaOrbitParam &delta_param,
-                  const FittingOptions &options = FittingOptions());
+double FitEphemeris(std::vector<PosAndClock> &data, OrbitParam &param,
+                    DeltaOrbitParam &delta_param,
+                    const FittingOptions &options = FittingOptions());
 
 #endif // SATELLITE_H
