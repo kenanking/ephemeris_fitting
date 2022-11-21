@@ -3,7 +3,7 @@
  * File Created: Friday, 18th November 2022 10:50:53 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 11:57:31 pm
+ * Last Modified: Monday, 21st November 2022 9:53:19 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -20,6 +20,7 @@
 #include "constants.h"
 #include "gnsstime.h"
 #include "sp3.h"
+#include "utils.h"
 
 using namespace gnsstime;
 using namespace sp3;
@@ -172,9 +173,6 @@ struct FittingOptions {
 Eigen::Matrix3d GetRotationMatrix(double angle, int axis);
 
 Eigen::Matrix3d GetRotationMatrixDerivative(double angle, int axis);
-
-double LagrangeInterpolate(std::vector<double> &x, std::vector<double> &y,
-                           double x0);
 
 std::vector<double> CalculateKeplerOrbit(Eigen::Vector3d &x,
                                          Eigen::Vector3d &v);

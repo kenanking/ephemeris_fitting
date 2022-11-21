@@ -1,9 +1,9 @@
-/*
+﻿/*
  * File: utils.h
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 2:40:21 pm
+ * Last Modified: Monday, 21st November 2022 9:56:56 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -71,6 +71,21 @@ inline std::vector<int> GetKSmallestIndices(const std::vector<double> &v,
   return indices;
 }
 
+inline double LagrangeInterpolate(std::vector<double> &x,
+                                  std::vector<double> &y, double x0) {
+  double mult, sum = 0.0;
+  int n = (int)x.size();
+  for (int i = 0; i < n; i++) {
+    mult = 1.0;
+    for (int j = 0; j < n; j++) {
+      if (j != i) {
+        mult *= (x0 - x[j]) / (x[i] - x[j]);
+      }
+    }
+    sum += mult * y[i];
+  }
 
+  return sum;
+}
 
 #endif // UTILS_H

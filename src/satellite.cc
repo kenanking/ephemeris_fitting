@@ -3,18 +3,16 @@
  * File Created: Friday, 18th November 2022 10:50:59 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 11:47:39 pm
+ * Last Modified: Monday, 21st November 2022 9:53:50 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
  */
+#include "satellite.h"
 
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-
-#include "constants.h"
-#include "satellite.h"
 
 Eigen::Matrix3d GetRotationMatrix(double angle, int axis) {
   Eigen::Matrix3d R;
@@ -52,23 +50,6 @@ Eigen::Matrix3d GetRotationMatrixDerivative(double angle, int axis) {
     break;
   }
   return dR;
-}
-
-double LagrangeInterpolate(std::vector<double> &x, std::vector<double> &y,
-                           double x0) {
-  double mult, sum = 0.0;
-  int n = (int)x.size();
-  for (int i = 0; i < n; i++) {
-    mult = 1.0;
-    for (int j = 0; j < n; j++) {
-      if (j != i) {
-        mult *= (x0 - x[j]) / (x[i] - x[j]);
-      }
-    }
-    sum += mult * y[i];
-  }
-
-  return sum;
 }
 
 std::vector<double> CalculateKeplerOrbit(Eigen::Vector3d &x,
@@ -197,7 +178,7 @@ void FitEphemeris(std::vector<PosAndClock> &data, OrbitParam &param,
     return;
   }
 
-  double toe = param.toe;   // 星历参考时刻
+  double toe = param.toe; // 星历参考时刻
 
   // 将参数结构体变为数组，便于使用循环操作
   std::vector<double> param_array = param.GetParam();
