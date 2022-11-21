@@ -3,18 +3,20 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Monday, 21st November 2022 6:32:27 pm
+ * Last Modified: Monday, 21st November 2022 6:57:54 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
  */
 
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include <Eigen/Dense>
+#include <json.hpp>
 
 #include "gnsstime.h"
 #include "satellite.h"
@@ -317,6 +319,45 @@ int main(int, char **) {
   cout << "================================================================="
        << endl;
   cout << endl;
+
+  // 结果输出到JSON文件
+  using json = nlohmann::json;
+
+  json j;
+  j["prn"] = prn;
+  j["start_time"] = start_time.ToString();
+  j["end_time"] = end_time.ToString();
+  j["interval"] = interval;
+  j["param"] = param.GetParam();
+  j["delta_param"] = delta_param.GetParam();
+
+  j["left_extrapolation"]["toe"] = toe_list_left;
+  j["left_extrapolation"]["x"] = xs_err_left;
+  j["left_extrapolation"]["y"] = ys_err_left;
+  j["left_extrapolation"]["z"] = zs_err_left;
+  j["left_extrapolation"]["rms_x"] = rms_x_err_left;
+  j["left_extrapolation"]["rms_y"] = rms_y_err_left;
+  j["left_extrapolation"]["rms_z"] = rms_z_err_left;
+
+  j["right_extrapolation"]["toe"] = toe_list_right;
+  j["right_extrapolation"]["x"] = xs_err_right;
+  j["right_extrapolation"]["y"] = ys_err_right;
+  j["right_extrapolation"]["z"] = zs_err_right;
+  j["right_extrapolation"]["rms_x"] = rms_x_err_right;
+  j["right_extrapolation"]["rms_y"] = rms_y_err_right;
+  j["right_extrapolation"]["rms_z"] = rms_z_err_right;
+
+  j["interpolation"]["toe"] = toe_list;
+  j["interpolation"]["x"] = xs_err;
+  j["interpolation"]["y"] = ys_err;
+  j["interpolation"]["z"] = zs_err;
+  j["interpolation"]["rms_x"] = rms_x_err;
+  j["interpolation"]["rms_y"] = rms_y_err;
+  j["interpolation"]["rms_z"] = rms_z_err;
+
+  ofstream ofs("result.json");
+  ofs << j.dump(4) << endl;
+  ofs.close();
 
   return 0;
 }
