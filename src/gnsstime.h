@@ -3,7 +3,7 @@
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 2:39:58 pm
+ * Last Modified: Monday, 21st November 2022 11:39:04 pm
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -12,6 +12,7 @@
 #ifndef GNSSTIME_H
 #define GNSSTIME_H
 
+#include <cmath>
 #include <ctime>
 #include <iostream>
 #include <string>
