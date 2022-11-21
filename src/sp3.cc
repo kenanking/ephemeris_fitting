@@ -1,18 +1,18 @@
-/*
+﻿/*
  * File: sp3.cc
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 2:40:15 pm
+ * Last Modified: Monday, 21st November 2022 10:06:43 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
  */
+#include "sp3.h"
 
 #include <fstream>
 #include <sstream>
 
-#include "sp3.h"
 #include "utils.h"
 
 namespace sp3 {
@@ -185,6 +185,31 @@ SP3File::GetKNearestNeighbors(const std::string &satName,
     result.push_back(ephemerisData.at(index).data.at(satName));
   }
 
+  return result;
+}
+
+PosAndClock SP3File::GetInterpolatedData(const std::string &satName,
+                                         gnsstime::GNSSTime &time, int k) {
+  std::vector<PosAndClock> neighbors = GetKNearestNeighbors(satName, time, k);
+  std::vector<double> ts, xs, ys, zs, clocks;
+  for (auto &neighbor : neighbors) {
+    ts.push_back(neighbor.toe);
+    xs.push_back(neighbor.x);
+    ys.push_back(neighbor.y);
+    zs.push_back(neighbor.z);
+    clocks.push_back(neighbor.clock);
+  }
+
+  int week;
+  double toe;
+  time.ToGPSTime(&week, &toe);
+
+  double x = LagrangeInterpolate(ts, xs, toe);
+  double y = LagrangeInterpolate(ts, ys, toe);
+  double z = LagrangeInterpolate(ts, zs, toe);
+  double clock = LagrangeInterpolate(ts, clocks, toe);
+
+  PosAndClock result{x, y, z, clock, toe};
   return result;
 }
 

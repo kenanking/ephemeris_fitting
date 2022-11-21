@@ -1,9 +1,9 @@
-/*
+﻿/*
  * File: sp3.h
  * File Created: Wednesday, 16th November 2022 10:19:47 pm
  * Author: Yan Tang (360383464@qq.com)
  * -----
- * Last Modified: Sunday, 20th November 2022 2:40:45 pm
+ * Last Modified: Monday, 21st November 2022 10:02:44 am
  * Modified By: Yan Tang (360383464@qq.com>)
  * -----
  * Copyright 2022 - 2022 Yan Tang
@@ -65,6 +65,9 @@ public:
   std::vector<PosAndClock> GetKNearestNeighbors(const std::string &satName,
                                                 const gnsstime::GNSSTime &time,
                                                 int k);
+
+  PosAndClock GetInterpolatedData(const std::string &satName,
+                                  gnsstime::GNSSTime &time, int k);
 };
 
 }; // namespace sp3
